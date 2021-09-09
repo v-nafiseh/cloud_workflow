@@ -195,6 +195,26 @@ Glance image list
 ```sh
 Grep Glance /root/answers.txt
 ```
+![](https://github.com/v-nafiseh/cloud_workflow/blob/master/asw.png)
+
+- Check Glance processes are operational:
+```sh
+Ps axf | grep glance
+```
+![](https://github.com/v-nafiseh/cloud_workflow/blob/master/grglance.png)
+
+- Check the bind-port:
+```sh
+Grep bind_port /etc/glance/glance_api.conf
+Ss -nlp | egrep 9292(ss is new alternative for netstat)
+```
+
+- Check the glance-api.conf for following:
+- Glance registry for storing metadata about images
+
+#### Continue ...
+
+
 
 
 
