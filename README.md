@@ -145,3 +145,57 @@ Keystone user-role-add --role admin --tenant services --user swift
 
 - In Iaas cloud, instances are not installed, they are deployed, they are built from images.
 
+![](https://github.com/v-nafiseh/cloud_workflow/blob/master/glanceArch.png)
+
+
+- As the picture above represents, glance is consisted of different components:
+- Glance-api: which accepts api requests for images from either client and nova components.
+- Glance registry: includes information of each image metadata.(store, process, retrieve).
+- Database: stores image metadata
+
+- Glance stores its files in filesystem by default, moreover it can store them in object storage or block storage.
+
+- Glance store, is the communication layer between glance and external storage backends or local file system > /var/lib/glance/images/
+- While uploading images to glance, we should specify the disk formats, which some of them are listed below:
+
+###### Different disk formats:
+- raw(without any metadata)
+- Vhd
+- Vmdk(vmware)
+-vdi(virtualbox and QEMU)
+- Iso
+- qcow2(QEMU default)
+- aki(Amazon kernel image)
+- Ari
+- ami
+
+###### Container formats(container actually contains the image file with metadata):
+- Bare (no metadata)
+- ovf(open virtualization format)
+- Ari
+- Ami
+- Ova
+- Docker
+
+###### Download the source image:
+```sh
+wget http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
+```
+
+- Creating an image in openstack cli:
+```sh
+Glance image-create --name “cirros” --file /path/to/image --disk-format qcow2 --container bare
+```
+- Confirm upload
+```sh
+Glance image list
+```
+##### Verifying Glance image services:
+- To check what packstack has configured:
+```sh
+Grep Glance /root/answers.txt
+```
+
+
+
+
